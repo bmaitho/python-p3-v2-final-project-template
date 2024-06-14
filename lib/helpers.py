@@ -1,6 +1,7 @@
 # lib/helpers.py
 from models.genre import Genre
 from models.song import Song
+from models.artist import Artist  # Add this import
 
 def exit_program():
     print("Goodbye!")
@@ -52,6 +53,21 @@ def delete_genre():
     else:
         print(f'Genre {id_} not found')
 
+def list_songs():
+    songs = Song.get_all()
+    for song in songs:
+        print(song)
+
+def find_song_by_title():
+    title = input("Enter the song's title: ")
+    song = Song.find_by_title(title)
+    print(song) if song else print(f'Song {title} not found')
+
+def find_song_by_id():
+    id_ = input("Enter the song's id: ")
+    song = Song.find_by_id(id_)
+    print(song) if song else print(f'Song {id_} not found')
+
 def create_song():
     title = input("Enter the song's title: ")
     artist = input("Enter the song's artist: ")
@@ -89,17 +105,48 @@ def delete_song():
     else:
         print(f'Song {id_} not found')
 
-def list_songs():
-    songs = Song.get_all()
-    for song in songs:
-        print(song)
+def list_artists():
+    artists = Artist.get_all()
+    for artist in artists:
+        print(artist)
 
-def find_song_by_title():
-    title = input("Enter the song's title: ")
-    song = Song.find_by_title(title)
-    print(song) if song else print(f'Song {title} not found')
+def find_artist_by_name():
+    name = input("Enter the artist's name: ")
+    artist = Artist.find_by_name(name)
+    print(artist) if artist else print(f'Artist {name} not found')
 
-def find_song_by_id():
-    id_ = input("Enter the song's id: ")
-    song = Song.find_by_id(id_)
-    print(song) if song else print(f'Song {id_} not found')
+def find_artist_by_id():
+    id_ = input("Enter the artist's id: ")
+    artist = Artist.find_by_id(id_)
+    print(artist) if artist else print(f'Artist {id_} not found')
+
+def create_artist():
+    name = input("Enter the artist's name: ")
+    try:
+        artist = Artist.create(name)
+        print(f'Success: {artist}')
+    except Exception as exc:
+        print("Error creating artist: ", exc)
+
+def update_artist():
+    id_ = input("Enter the artist's id: ")
+    artist = Artist.find_by_id(id_)
+    if artist:
+        try:
+            name = input("Enter the artist's new name: ")
+            artist.name = name
+            artist.update()
+            print(f'Success: {artist}')
+        except Exception as exc:
+            print("Error updating artist: ", exc)
+    else:
+        print(f'Artist {id_} not found')
+
+def delete_artist():
+    id_ = input("Enter the artist's id: ")
+    artist = Artist.find_by_id(id_)
+    if artist:
+        artist.delete()
+        print(f'Artist {id_} deleted')
+    else:
+        print(f'Artist {id_} not found')
