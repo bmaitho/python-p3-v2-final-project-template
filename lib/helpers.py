@@ -1,9 +1,19 @@
 # lib/helpers.py
-
-def helper_1():
-    print("Performing useful function#1.")
-
-
+from models.song import Song
 def exit_program():
     print("Goodbye!")
-    exit()
+def add_song():
+    
+    name = input("Enter song name: ")
+    artist=input("Enter artist name: ")
+    genre = input("Enter genre: ")
+    
+
+    try:
+        Song.create_song(name, artist, genre)
+        print("Song added successfully!")
+    except Exception as e:
+        print("An error occurred:", e)
+
+
+    
