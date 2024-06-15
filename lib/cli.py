@@ -1,9 +1,8 @@
-# cli.py
 from helpers import exit_program, list_genres, find_genre_by_name, find_genre_by_id
 from helpers import create_genre, update_genre, delete_genre, create_song, update_song
 from helpers import delete_song, list_songs, find_song_by_id, find_song_by_title
-from helpers import list_artists, find_artist_by_name, find_artist_by_id  # Add these imports
-from helpers import create_artist, update_artist, delete_artist  # Add these imports
+from helpers import list_artists, find_artist_by_name, find_artist_by_id
+from helpers import create_artist, update_artist, delete_artist, find_artist_by_song_id
 
 def main_menu():
     print("1. List Genres")
@@ -18,12 +17,13 @@ def main_menu():
     print("10. Create Song")
     print("11. Update Song")
     print("12. Delete Song")
-    print("13. List Artists")  # Add this line
-    print("14. Find Artist by Name")  # Add this line
-    print("15. Find Artist by ID")  # Add this line
-    print("16. Create Artist")  # Add this line
-    print("17. Update Artist")  # Add this line
-    print("18. Delete Artist")  # Add this line
+    print("13. List Artists")
+    print("14. Find Artist by Name")
+    print("15. Find Artist by ID")
+    print("16. Create Artist")
+    print("17. Update Artist")
+    print("18. Delete Artist")
+    print("19. Find Artist by Song ID")
     print("0. Exit")
     choice = input("Enter your choice: ")
 
@@ -51,18 +51,20 @@ def main_menu():
         update_song()
     elif choice == '12':
         delete_song()
-    elif choice == '13':  # Add this block
+    elif choice == '13':
         list_artists()
-    elif choice == '14':  # Add this block
+    elif choice == '14':
         find_artist_by_name()
-    elif choice == '15':  # Add this block
+    elif choice == '15':
         find_artist_by_id()
-    elif choice == '16':  # Add this block
+    elif choice == '16':
         create_artist()
-    elif choice == '17':  # Add this block
+    elif choice == '17':
         update_artist()
-    elif choice == '18':  # Add this block
+    elif choice == '18':
         delete_artist()
+    elif choice == '19':
+        find_artist_by_song_id()
     elif choice == '0':
         exit_program()
     else:
