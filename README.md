@@ -1,11 +1,16 @@
-# Phase 3 CLI+ORM Project Template
-## Learning Goals
-- Discuss the basic directory structure of a CLI.
-- Outline the first steps in building a CLI.
+
+#### NGOMA
+
+# Date 2024 - 06 - 14
+
+## BY BRIAN MAITHO
+
 ## Introduction
 This project is a Command Line Interface (CLI) application designed to manage a music database, incorporating an Object-Relational Mapping (ORM) to handle data persistence. The application allows users to manage artists, songs, and genres, providing a comprehensive tool for organizing and accessing music-related data. Users can perform a variety of operations, including creating, reading, updating, and deleting records in the database. The CLI guides the user through these tasks with a menu-driven interface, making it straightforward to interact with the underlying data.
 
 The application is structured to ensure a clear separation of concerns, with distinct modules for the user interface, data persistence, and business logic. This modular design facilitates easy maintenance and scalability, allowing for future enhancements and modifications. By leveraging SQLite for database management and Python for the CLI and ORM, this project provides a robust and efficient solution for managing music data.
+
+
 
 ## module and directory structure
 ```console
@@ -24,18 +29,37 @@ The application is structured to ensure a clear separation of concerns, with dis
     └── helpers.py
 ```
  ---
-## Generating Your Environment
-You might have noticed in the file structure- there's already a Pipfile!
+## Installation
+To run NGOMA  on your local machine, follow these steps:
 
-Install any additional dependencies you know you'll need for your project by adding them to the Pipfile. Then run the commands:
+1. Clone the repository to your local machine:
 
-```console
-Copy code
-pipenv install
+git clone https://github.com/bmaitho/python-p3-v2-final-project-template
+2. Navigate to the project directory in your terminal.
+
+3. Install the dependencies:
+
+4.  NGOMA uses Python Standard Libraries. No additional dependecies required.
+5. Set up the database:
+
+-  Ensure you have a compatible database (e.g., SQLite, PostgreSQL).
+-  Update the database configuration in the application code (models.py or similar) as per your database setup.
+6. Running the application:
+
+- Activate the virtual environment:
+```
 pipenv shell
 ```
- ## You can run the CLI with python lib/cli.py. The CLI will ask for input, do some work, and accomplish some sort of task.
+- Seed the database with some initial data:
+```
+python lib/seed.py
+```
+- Run the CLI application:
+```
+python lib/cli.py
+```
 
+ 
 ## This project has a CLI in lib/cli.py that looks like this:
 
 ```py
@@ -121,169 +145,7 @@ if __name__ == "__main__":
 ## Helpers
 The helpers.py file contains functions that are called by the CLI to perform various operations on the database, such as listing all artists, finding an artist by name, creating a new song, etc.
 
-```py
 
-# lib/helpers.py
-# lib/helpers.py
-from models.artist import Artist
-from models.song import Song
-from models.genre import Genre
-def exit_program():
-    print("Goodbye!")
-    exit()
-
-def list_genres():
-    genres = Genre.get_all()
-    for genre in genres:
-        print(genre)
-
-def find_genre_by_name():
-    name = input("Enter the genre's name: ")
-    genre = Genre.find_by_name(name)
-    print(genre) if genre else print(f'Genre {name} not found')
-
-def find_genre_by_id():
-    id_ = input("Enter the genre's id: ")
-    genre = Genre.find_by_id(id_)
-    print(genre) if genre else print(f'Genre {id_} not found')
-
-def create_genre():
-    name = input("Enter the genre's name: ")
-    try:
-        genre = Genre.create(name)
-        print(f'Success: {genre}')
-    except Exception as exc:
-        print("Error creating genre: ", exc)
-
-def update_genre():
-    id_ = input("Enter the genre's id: ")
-    genre = Genre.find_by_id(id_)
-    if genre:
-        try:
-            name = input("Enter the genre's new name: ")
-            genre.name = name
-            genre.update()
-            print(f'Success: {genre}')
-        except Exception as exc:
-            print("Error updating genre: ", exc)
-    else:
-        print(f'Genre {id_} not found')
-
-def delete_genre():
-    id_ = input("Enter the genre's id: ")
-    genre = Genre.find_by_id(id_)
-    if genre:
-        genre.delete()
-        print(f'Genre {id_} deleted')
-    else:
-        print(f'Genre {id_} not found')
-
-def list_artists():
-    artists = Artist.get_all()
-    for artist in artists:
-        print(artist)
-
-def find_artist_by_name():
-    name = input("Enter the artist's name: ")
-    artist = Artist.find_by_name(name)
-    print(artist) if artist else print(f'Artist {name} not found')
-
-def find_artist_by_id():
-    id_ = input("Enter the artist's id: ")
-    artist = Artist.find_by_id(id_)
-    print(artist) if artist else print(f'Artist {id_} not found')
-
-def create_artist():
-    name = input("Enter the artist's name: ")
-    try:
-        artist = Artist.create(name)
-        print(f'Success: {artist}')
-    except Exception as exc:
-        print("Error creating artist: ", exc)
-
-def update_artist():
-    id_ = input("Enter the artist's id: ")
-    artist = Artist.find_by_id(id_)
-    if artist:
-        try:
-            name = input("Enter the artist's new name: ")
-            artist.name = name
-            artist.update()
-            print(f'Success: {artist}')
-        except Exception as exc:
-            print("Error updating artist: ", exc)
-    else:
-        print(f'Artist {id_} not found')
-
-def delete_artist():
-    id_ = input("Enter the artist's id: ")
-    artist = Artist.find_by_id(id_)
-    if artist:
-        artist.delete()
-        print(f'Artist {id_} deleted')
-    else:
-        print(f'Artist {id_} not found')
-
-# Song functions with artist_id integration
-def create_song():
-    title = input("Enter the song's title: ")
-    artist_id = int(input("Enter the artist's id: "))
-    genre_id = int(input("Enter the genre's id: "))
-    try:
-        song = Song.create(title, artist_id, genre_id)
-        print(f'Success: {song}')
-    except Exception as exc:
-        print("Error creating song: ", exc)
-
-def update_song():
-    id_ = input("Enter the song's id: ")
-    song = Song.find_by_id(id_)
-    if song:
-        try:
-            title = input("Enter the song's new title: ")
-            artist_id = int(input("Enter the artist's new id: "))
-            genre_id = int(input("Enter the genre's new id: "))
-            song.title = title
-            song.artist_id = artist_id
-            song.genre_id = genre_id
-            song.update()
-            print(f'Success: {song}')
-        except Exception as exc:
-            print("Error updating song: ", exc)
-    else:
-        print(f'Song {id_} not found')
-
-
-def delete_song():
-    id_ = input("Enter the song's id: ")
-    song = Song.find_by_id(id_)
-    if song:
-        song.delete()
-        print(f'Song {id_} deleted')
-    else:
-        print(f'Song {id_} not found')
-
-def list_songs():
-    songs = Song.get_all()
-    for song in songs:
-        print(song)
-
-def find_song_by_title():
-    title = input("Enter the song's title: ")
-    song = Song.find_by_title(title)
-    print(song) if song else print(f'Song {title} not found')
-
-def find_song_by_id():
-    id_ = input("Enter the song's id: ")
-    song = Song.find_by_id(id_)
-    print(song) if song else print(f'Song {id_} not found')
-
-def find_artist_by_song_id():
-    id_ = input("Enter the song's id: ")
-    artist = Song.find_artist_by_song_id(id_)
-    print(artist) if artist else print(f'Artist for song {id_} not found')
-
-```
 
 ## Installation
 - Clone the repository.
@@ -317,7 +179,7 @@ def find_artist_by_song_id():
 19  Delete song
 0  Exit the program
 ```
- ## Models
+ ## Models folder contains:
 
 ## Genre
 The Genre class represents a music genre. It includes methods for creating, retrieving, updating, and deleting genre records in the database.
@@ -330,8 +192,33 @@ The Artist class represents an artist. It includes methods for creating, retriev
 
 ## Debug
 The debug.py file can be used to interactively test the models and functions without going through the CLI. This is helpful for development and debugging.
+## Helpers
+The helpers.py file contains functions that are called by the CLI to perform various operations on the database, such as listing all artists, finding an artist by name, creating a new song, etc.
 
 ## Conclusion
 This project showcases a CLI application with an ORM in Python.Demonstarting how to organize code for user interaction, data persistence, and business logic in a clean and modular way.
+
+
+## Dependency
+* Python Standard Libraries: Used for CLI interface, datetime handling, and basic input/output operations.
+## Technologies Used
+* Python: The app is built using the Python library.
+## Contributing
+Contributions to NGOMA are welcome! If you'd like to contribute:
+
+ * Fork the repository.
+ * Create your feature branch (git checkout -b feature/YourFeature)
+ * Commit your changes (git commit -am 'Add some feature').
+ * Push to the branch (git push origin feature/YourFeature).
+ * Create a new Pull Request.
+Please ensure your code follows the project's coding style and includes appropriate documentation.
+
+## Contact
+For any support or inquiries, please contact Brian Maitho at bmaitho@gmail.com
+## License
+This project is licensed under the MIT License.
+
+## Feedback
+If you have any feedback or suggestions for improvement, please feel free to contact me. I'd love to hear from you!
 
 Happy coding !!!!!
