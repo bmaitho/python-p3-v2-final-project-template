@@ -120,7 +120,8 @@ if __name__ == "__main__":
 
 
 ```
-### The helper functions are located in lib/helpers.py:
+## Helpers
+The helpers.py file contains functions that are called by the CLI to perform various operations on the database, such as listing all artists, finding an artist by name, creating a new song, etc.
 
 ```py
 
@@ -324,9 +325,6 @@ The Song class represents a song. It includes methods for creating, retrieving, 
 
 ## Artist
 The Artist class represents an artist. It includes methods for creating, retrieving, updating, and deleting artist records in the database.
-
-## Helpers
-The helpers.py file contains functions that are called by the CLI to perform various operations on the database, such as listing all artists, finding an artist by name, creating a new song, etc.
 
 ## Debug
 The debug.py file can be used to interactively test the models and functions without going through the CLI. This is helpful for development and debugging.
