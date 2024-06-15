@@ -98,7 +98,6 @@ def delete_artist():
     else:
         print(f'Artist {id_} not found')
 
-# Song functions with artist_id integration
 def create_song():
     title = input("Enter the song's title: ")
     artist_id = int(input("Enter the artist's id: "))

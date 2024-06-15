@@ -6,7 +6,7 @@ from models.song import Song
 from models.artist import Artist
 
 def seed_database():
-    # Drop the tables if they exist and create new ones
+   
     Genre.drop_table()
     Genre.create_table()
     Artist.drop_table()
@@ -14,7 +14,7 @@ def seed_database():
     Song.drop_table()
     Song.create_table()
 
-    # Create seed data for genres
+  
     genres = [
         "Afro", "Hip-Hop", "Afro-pop", "Indie rock", "Classical",
         "Country", "Reggae", "Pop", "Rap"
@@ -22,14 +22,12 @@ def seed_database():
     for genre_name in genres:
         Genre.create(genre_name)
 
-    # Create seed data for artists
     artists = [
         "Tems", "Drake", "Sauti Sol", "Arctic Monkeys", "Ludwig van Beethoven",
         "John Denver", "Bob Marley", "Michael Jackson", "Kendrick Lamar"
     ]
     artist_instances = [Artist.create(name) for name in artists]
 
-    # Create seed data for songs
     songs = [
         ("WAIT FOR U", artist_instances[0].id, 1), 
         ("Search and Rescue", artist_instances[1].id, 2),
