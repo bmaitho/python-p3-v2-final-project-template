@@ -1,4 +1,3 @@
-# models/artist.py
 from models.__init__ import CURSOR, CONN
 
 class Artist:
@@ -43,7 +42,7 @@ class Artist:
         CONN.commit()
 
     def save(self):
-        """ Insert a new row with the name value of the current Artist instance.
+        """ Insert a new row with the attributes of the current Artist instance.
         Update object id attribute using the primary key value of new row.
         Save the object in local dictionary using table row's PK as dictionary key"""
         sql = """
@@ -86,7 +85,7 @@ class Artist:
 
     @classmethod
     def get_all(cls):
-        """Return a list containing a Artist object per row in the table"""
+        """Return a list containing an Artist object per row in the table"""
         sql = """
             SELECT *
             FROM artists
@@ -96,7 +95,7 @@ class Artist:
 
     @classmethod
     def find_by_id(cls, id):
-        """Return a Artist object corresponding to the table row matching the specified primary key"""
+        """Return an Artist object corresponding to the table row matching the specified primary key"""
         sql = """
             SELECT *
             FROM artists
@@ -107,7 +106,7 @@ class Artist:
 
     @classmethod
     def find_by_name(cls, name):
-        """Return a Artist object corresponding to the first table row matching the specified name"""
+        """Return an Artist object corresponding to the table row matching the specified name"""
         sql = """
             SELECT *
             FROM artists
@@ -118,6 +117,6 @@ class Artist:
 
     @classmethod
     def instance_from_db(cls, row):
-        """Create a Artist instance from a database row"""
+        """Create an Artist instance from a database row"""
         id, name = row
         return cls(name, id)
