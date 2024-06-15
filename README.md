@@ -290,7 +290,8 @@ def find_artist_by_song_id():
 -  Run pipenv install to install the dependencies.
 -  Run pipenv shell to activate the virtual environment.
 -  Running the CLI
--  To start the CLI, run:
+-  To start the CLI, run: python lib/cli.py
+
 
 ## The CLI offers the following options:
 ```

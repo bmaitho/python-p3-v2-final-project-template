@@ -24,8 +24,8 @@ def seed_database():
 
     # Create seed data for artists
     artists = [
-        "Tems", "Drake", "sauti sol", "Arctic Monkeys", "Ludwig van Beethoven",
-        "John Denver", "Bob Marley", "Michael Jackson", "Kendrik Lamar"
+        "Tems", "Drake", "Sauti Sol", "Arctic Monkeys", "Ludwig van Beethoven",
+        "John Denver", "Bob Marley", "Michael Jackson", "Kendrick Lamar"
     ]
     artist_instances = [Artist.create(name) for name in artists]
 
@@ -33,9 +33,9 @@ def seed_database():
     songs = [
         ("WAIT FOR U", artist_instances[0].id, 1), 
         ("Search and Rescue", artist_instances[1].id, 2),
-        ("suzzana", artist_instances[2].id, 3),
-        ("I wanna Be Yours", artist_instances[3].id, 4),
-        ("Piano sonata", artist_instances[4].id, 5),
+        ("Suzanna", artist_instances[2].id, 3),
+        ("I Wanna Be Yours", artist_instances[3].id, 4),
+        ("Piano Sonata", artist_instances[4].id, 5),
         ("Take Me Home, Country Roads", artist_instances[5].id, 6),
         ("One Love", artist_instances[6].id, 7),
         ("Thriller", artist_instances[7].id, 8),

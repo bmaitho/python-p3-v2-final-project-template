@@ -1,5 +1,4 @@
 from models.__init__ import CURSOR, CONN
-from models.artist import Artist
 
 class Song:
     all = {}
@@ -11,7 +10,7 @@ class Song:
         self.genre_id = genre_id
 
     def __repr__(self):
-        return f"<Song(title={self.title}, artist_id={self.artist_id}, genre_id={self.genre_id}, id={self.id})>"
+        return f"song: {self.title}, Artist ID: {self.artist_id}, Genre ID: {self.genre_id}, ID: {self.id}"
 
     @property
     def title(self):
@@ -143,14 +142,6 @@ class Song:
         """
         row = CURSOR.execute(sql, (title,)).fetchone()
         return cls.instance_from_db(row) if row else None
-
-    @classmethod
-    def find_artist_by_song_id(cls, song_id):
-        """Return an Artist object corresponding to the artist of the song with the specified ID"""
-        song = cls.find_by_id(song_id)
-        if song:
-            return Artist.find_by_id(song.artist_id)
-        return None
 
     @classmethod
     def instance_from_db(cls, row):

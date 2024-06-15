@@ -8,7 +8,7 @@ class Artist:
         self.name = name
 
     def __repr__(self):
-        return f"<Artist(name={self.name}, id={self.id})>"
+        return f"Artist(name={self.name}, id={self.id})"
 
     @property
     def name(self):

@@ -102,7 +102,7 @@ def delete_artist():
 def create_song():
     title = input("Enter the song's title: ")
     artist_id = int(input("Enter the artist's id: "))
-    genre_id = int(input("Enter the genre's id for the song: "))
+    genre_id = int(input("Enter the genre's id: "))
     try:
         song = Song.create(title, artist_id, genre_id)
         print(f'Success: {song}')
@@ -116,7 +116,7 @@ def update_song():
         try:
             title = input("Enter the song's new title: ")
             artist_id = int(input("Enter the artist's new id: "))
-            genre_id = int(input("Enter the genre's new id for the song: "))
+            genre_id = int(input("Enter the genre's new id: "))
             song.title = title
             song.artist_id = artist_id
             song.genre_id = genre_id
@@ -126,6 +126,7 @@ def update_song():
             print("Error updating song: ", exc)
     else:
         print(f'Song {id_} not found')
+
 
 def delete_song():
     id_ = input("Enter the song's id: ")
