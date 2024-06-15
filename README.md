@@ -291,12 +291,8 @@ def find_artist_by_song_id():
 -  Running the CLI
 -  To start the CLI, run:
 
+## The CLI offers the following options:
 ```
-console :
-python lib/cli.py
-CLI Commands
-The CLI offers the following options:
-
 1  List all artists
 2  Find artist by name
 3  Find artist by id
