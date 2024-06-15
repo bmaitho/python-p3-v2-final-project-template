@@ -145,6 +145,14 @@ class Song:
         return cls.instance_from_db(row) if row else None
 
     @classmethod
+    def find_artist_by_song_id(cls, song_id):
+        """Return an Artist object corresponding to the artist of the song with the specified ID"""
+        song = cls.find_by_id(song_id)
+        if song:
+            return Artist.find_by_id(song.artist_id)
+        return None
+
+    @classmethod
     def instance_from_db(cls, row):
         """Create a Song instance from a database row"""
         id, title, artist_id, genre_id = row

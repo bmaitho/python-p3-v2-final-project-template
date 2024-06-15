@@ -1,8 +1,7 @@
 # lib/helpers.py
-from models.genre import Genre
+from models.artist import Artist
 from models.song import Song
-from models.artist import Artist  # Add this import
-
+from models.genre import Genre
 def exit_program():
     print("Goodbye!")
     exit()
@@ -53,58 +52,6 @@ def delete_genre():
     else:
         print(f'Genre {id_} not found')
 
-def list_songs():
-    songs = Song.get_all()
-    for song in songs:
-        print(song)
-
-def find_song_by_title():
-    title = input("Enter the song's title: ")
-    song = Song.find_by_title(title)
-    print(song) if song else print(f'Song {title} not found')
-
-def find_song_by_id():
-    id_ = input("Enter the song's id: ")
-    song = Song.find_by_id(id_)
-    print(song) if song else print(f'Song {id_} not found')
-
-def create_song():
-    title = input("Enter the song's title: ")
-    artist = input("Enter the song's artist: ")
-    genre_id = int(input("Enter the genre's id for the song: "))
-    try:
-        song = Song.create(title, artist, genre_id)
-        print(f'Success: {song}')
-    except Exception as exc:
-        print("Error creating song: ", exc)
-
-def update_song():
-    id_ = input("Enter the song's id: ")
-    song = Song.find_by_id(id_)
-    if song:
-        try:
-            title = input("Enter the song's new title: ")
-            artist = input("Enter the song's new artist: ")
-            genre_id = int(input("Enter the genre's new id for the song: "))
-            song.title = title
-            song.artist = artist
-            song.genre_id = genre_id
-            song.update()
-            print(f'Success: {song}')
-        except Exception as exc:
-            print("Error updating song: ", exc)
-    else:
-        print(f'Song {id_} not found')
-
-def delete_song():
-    id_ = input("Enter the song's id: ")
-    song = Song.find_by_id(id_)
-    if song:
-        song.delete()
-        print(f'Song {id_} deleted')
-    else:
-        print(f'Song {id_} not found')
-
 def list_artists():
     artists = Artist.get_all()
     for artist in artists:
@@ -150,3 +97,61 @@ def delete_artist():
         print(f'Artist {id_} deleted')
     else:
         print(f'Artist {id_} not found')
+
+# Song functions with artist_id integration
+def create_song():
+    title = input("Enter the song's title: ")
+    artist_id = int(input("Enter the artist's id: "))
+    genre_id = int(input("Enter the genre's id for the song: "))
+    try:
+        song = Song.create(title, artist_id, genre_id)
+        print(f'Success: {song}')
+    except Exception as exc:
+        print("Error creating song: ", exc)
+
+def update_song():
+    id_ = input("Enter the song's id: ")
+    song = Song.find_by_id(id_)
+    if song:
+        try:
+            title = input("Enter the song's new title: ")
+            artist_id = int(input("Enter the artist's new id: "))
+            genre_id = int(input("Enter the genre's new id for the song: "))
+            song.title = title
+            song.artist_id = artist_id
+            song.genre_id = genre_id
+            song.update()
+            print(f'Success: {song}')
+        except Exception as exc:
+            print("Error updating song: ", exc)
+    else:
+        print(f'Song {id_} not found')
+
+def delete_song():
+    id_ = input("Enter the song's id: ")
+    song = Song.find_by_id(id_)
+    if song:
+        song.delete()
+        print(f'Song {id_} deleted')
+    else:
+        print(f'Song {id_} not found')
+
+def list_songs():
+    songs = Song.get_all()
+    for song in songs:
+        print(song)
+
+def find_song_by_title():
+    title = input("Enter the song's title: ")
+    song = Song.find_by_title(title)
+    print(song) if song else print(f'Song {title} not found')
+
+def find_song_by_id():
+    id_ = input("Enter the song's id: ")
+    song = Song.find_by_id(id_)
+    print(song) if song else print(f'Song {id_} not found')
+
+def find_artist_by_song_id():
+    id_ = input("Enter the song's id: ")
+    artist = Song.find_artist_by_song_id(id_)
+    print(artist) if artist else print(f'Artist for song {id_} not found')
