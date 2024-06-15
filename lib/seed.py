@@ -16,30 +16,30 @@ def seed_database():
 
     # Create seed data for genres
     genres = [
-        "Rock", "Jazz", "Classical", "Hip-Hop", "Electronic",
-        "Country", "Reggae", "Pop", "Blues"
+        "Afro", "Hip-Hop", "Afro-pop", "Indie rock", "Classical",
+        "Country", "Reggae", "Pop", "Rap"
     ]
     for genre_name in genres:
         Genre.create(genre_name)
 
     # Create seed data for artists
     artists = [
-        "Led Zeppelin", "Miles Davis", "Ludwig van Beethoven", "Eminem", "Zedd",
-        "John Denver", "Bob Marley", "Michael Jackson", "B.B. King"
+        "Tems", "Drake", "sauti sol", "Arctic Monkeys", "Ludwig van Beethoven",
+        "John Denver", "Bob Marley", "Michael Jackson", "Kendrik Lamar"
     ]
     artist_instances = [Artist.create(name) for name in artists]
 
     # Create seed data for songs
     songs = [
-        ("Stairway to Heaven", artist_instances[0].id, 1), 
-        ("So What", artist_instances[1].id, 2),
-        ("Moonlight Sonata", artist_instances[2].id, 3),
-        ("Lose Yourself", artist_instances[3].id, 4),
-        ("Clarity", artist_instances[4].id, 5),
+        ("WAIT FOR U", artist_instances[0].id, 1), 
+        ("Search and Rescue", artist_instances[1].id, 2),
+        ("suzzana", artist_instances[2].id, 3),
+        ("I wanna Be Yours", artist_instances[3].id, 4),
+        ("Piano sonata", artist_instances[4].id, 5),
         ("Take Me Home, Country Roads", artist_instances[5].id, 6),
         ("One Love", artist_instances[6].id, 7),
         ("Thriller", artist_instances[7].id, 8),
-        ("The Thrill Is Gone", artist_instances[8].id, 9)
+        ("Rich Spirit", artist_instances[8].id, 9)
     ]
     for title, artist_id, genre_id in songs:
         Song.create(title, artist_id, genre_id)
