@@ -117,14 +117,13 @@ def main_menu():
 
 if __name__ == "__main__":
     main_menu()
-
-
 ```
 ## Helpers
 The helpers.py file contains functions that are called by the CLI to perform various operations on the database, such as listing all artists, finding an artist by name, creating a new song, etc.
 
 ```py
 
+# lib/helpers.py
 # lib/helpers.py
 from models.artist import Artist
 from models.song import Song
@@ -225,10 +224,11 @@ def delete_artist():
     else:
         print(f'Artist {id_} not found')
 
+# Song functions with artist_id integration
 def create_song():
     title = input("Enter the song's title: ")
     artist_id = int(input("Enter the artist's id: "))
-    genre_id = int(input("Enter the genre's id for the song: "))
+    genre_id = int(input("Enter the genre's id: "))
     try:
         song = Song.create(title, artist_id, genre_id)
         print(f'Success: {song}')
@@ -242,7 +242,7 @@ def update_song():
         try:
             title = input("Enter the song's new title: ")
             artist_id = int(input("Enter the artist's new id: "))
-            genre_id = int(input("Enter the genre's new id for the song: "))
+            genre_id = int(input("Enter the genre's new id: "))
             song.title = title
             song.artist_id = artist_id
             song.genre_id = genre_id
@@ -252,6 +252,7 @@ def update_song():
             print("Error updating song: ", exc)
     else:
         print(f'Song {id_} not found')
+
 
 def delete_song():
     id_ = input("Enter the song's id: ")
