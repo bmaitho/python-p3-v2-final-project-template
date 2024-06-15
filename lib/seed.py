@@ -32,7 +32,7 @@ def seed_database():
         ("So What", "Miles Davis", 2),                       # Jazz
         ("Moonlight Sonata", "Ludwig van Beethoven", 3),      # Classical
         ("Lose Yourself", "Eminem", 4),                       # Hip-Hop
-        ("Clarity", "Zedd", 5),                                #   Electronic
+        ("Clarity", "Zedd", 5),                               #   Electronic
         ("Take Me Home, Country Roads", "John Denver", 6),    # Country
         ("One Love", "Bob Marley", 7),                        # Reggae
         ("Thriller", "Michael Jackson", 8),                   #  Pop

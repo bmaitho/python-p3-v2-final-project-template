@@ -1,17 +1,17 @@
-# models/song.py
 from models.__init__ import CURSOR, CONN
+from models.artist import Artist
 
 class Song:
     all = {}
 
-    def __init__(self, title, artist, genre_id, id=None):
+    def __init__(self, title, artist_id, genre_id, id=None):
         self.id = id
         self.title = title
-        self.artist = artist
+        self.artist_id = artist_id
         self.genre_id = genre_id
 
     def __repr__(self):
-        return f"<Song(title={self.title}, artist={self.artist}, genre_id={self.genre_id}, id={self.id})>"
+        return f"<Song(title={self.title}, artist_id={self.artist_id}, genre_id={self.genre_id}, id={self.id})>"
 
     @property
     def title(self):
@@ -25,15 +25,15 @@ class Song:
             raise ValueError("Title must be a non-empty string")
 
     @property
-    def artist(self):
-        return self._artist
+    def artist_id(self):
+        return self._artist_id
 
-    @artist.setter
-    def artist(self, artist):
-        if isinstance(artist, str) and len(artist):
-            self._artist = artist
+    @artist_id.setter
+    def artist_id(self, artist_id):
+        if isinstance(artist_id, int) and artist_id > 0:
+            self._artist_id = artist_id
         else:
-            raise ValueError("Artist must be a non-empty string")
+            raise ValueError("Artist ID must be a positive integer")
 
     @property
     def genre_id(self):
@@ -53,8 +53,9 @@ class Song:
             CREATE TABLE IF NOT EXISTS songs (
             id INTEGER PRIMARY KEY,
             title TEXT,
-            artist TEXT,
+            artist_id INTEGER,
             genre_id INTEGER,
+            FOREIGN KEY (artist_id) REFERENCES artists(id),
             FOREIGN KEY (genre_id) REFERENCES genres(id))
         """
         CURSOR.execute(sql)
@@ -74,18 +75,18 @@ class Song:
         Update object id attribute using the primary key value of new row.
         Save the object in local dictionary using table row's PK as dictionary key"""
         sql = """
-            INSERT INTO songs (title, artist, genre_id)
+            INSERT INTO songs (title, artist_id, genre_id)
             VALUES (?, ?, ?)
         """
-        CURSOR.execute(sql, (self.title, self.artist, self.genre_id))
+        CURSOR.execute(sql, (self.title, self.artist_id, self.genre_id))
         CONN.commit()
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
 
     @classmethod
-    def create(cls, title, artist, genre_id):
+    def create(cls, title, artist_id, genre_id):
         """ Initialize a new Song instance and save the object to the database """
-        song = cls(title, artist, genre_id)
+        song = cls(title, artist_id, genre_id)
         song.save()
         return song
 
@@ -93,10 +94,10 @@ class Song:
         """Update the table row corresponding to the current Song instance."""
         sql = """
             UPDATE songs
-            SET title = ?, artist = ?, genre_id = ?
+            SET title = ?, artist_id = ?, genre_id = ?
             WHERE id = ?
         """
-        CURSOR.execute(sql, (self.title, self.artist, self.genre_id, self.id))
+        CURSOR.execute(sql, (self.title, self.artist_id, self.genre_id, self.id))
         CONN.commit()
 
     def delete(self):
@@ -146,5 +147,5 @@ class Song:
     @classmethod
     def instance_from_db(cls, row):
         """Create a Song instance from a database row"""
-        id, title, artist, genre_id = row
-        return cls(title, artist, genre_id, id)
+        id, title, artist_id, genre_id = row
+        return cls(title, artist_id, genre_id, id)

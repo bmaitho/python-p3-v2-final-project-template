@@ -2,6 +2,8 @@
 from helpers import exit_program, list_genres, find_genre_by_name, find_genre_by_id
 from helpers import create_genre, update_genre, delete_genre, create_song, update_song
 from helpers import delete_song, list_songs, find_song_by_id, find_song_by_title
+from helpers import list_artists, find_artist_by_name, find_artist_by_id  # Add these imports
+from helpers import create_artist, update_artist, delete_artist  # Add these imports
 
 def main_menu():
     print("1. List Genres")
@@ -16,6 +18,12 @@ def main_menu():
     print("10. Create Song")
     print("11. Update Song")
     print("12. Delete Song")
+    print("13. List Artists")  # Add this line
+    print("14. Find Artist by Name")  # Add this line
+    print("15. Find Artist by ID")  # Add this line
+    print("16. Create Artist")  # Add this line
+    print("17. Update Artist")  # Add this line
+    print("18. Delete Artist")  # Add this line
     print("0. Exit")
     choice = input("Enter your choice: ")
 
@@ -43,6 +51,18 @@ def main_menu():
         update_song()
     elif choice == '12':
         delete_song()
+    elif choice == '13':  # Add this block
+        list_artists()
+    elif choice == '14':  # Add this block
+        find_artist_by_name()
+    elif choice == '15':  # Add this block
+        find_artist_by_id()
+    elif choice == '16':  # Add this block
+        create_artist()
+    elif choice == '17':  # Add this block
+        update_artist()
+    elif choice == '18':  # Add this block
+        delete_artist()
     elif choice == '0':
         exit_program()
     else:
