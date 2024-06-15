@@ -330,6 +330,6 @@ The Artist class represents an artist. It includes methods for creating, retriev
 The debug.py file can be used to interactively test the models and functions without going through the CLI. This is helpful for development and debugging.
 
 ## Conclusion
-This project provides a foundational structure for building a CLI application with an ORM in Python. It demonstrates how to organize code for user interaction, data persistence, and business logic in a clean and modular way.
+This project showcases a CLI application with an ORM in Python.Demonstarting how to organize code for user interaction, data persistence, and business logic in a clean and modular way.
 
 Happy coding !!!!!
